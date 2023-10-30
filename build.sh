@@ -8,11 +8,11 @@ fi
 
 
 ## ensure version is set
-if [ -z "${VERSION}" ]; then
-	echo -ne "Please export or set VERSION variable\n"
+if [ -z "${IN_VERSION}" ]; then
+	echo -ne "Please export or set IN_VERSION variable\n"
 	exit 1
 fi
-export VERSION="${VERSION}"
+export IN_VERSION="${IN_VERSION}"
 
 ## install deps
 apt update 2>/dev/null
@@ -25,7 +25,7 @@ make
 ## run makeinstall
 checkinstall --install=no \
 	--pkgname=libnet-sftp-foreign-perl \
-	--pkgversion="5.99+really"${VERSION} \
+	--pkgversion="5.99+really"${IN_VERSION} \
 	--pkgrelease=1 \
 	--pkgarch="all" \
 	--maintainer="hosting@ptfs-europe.com" \
