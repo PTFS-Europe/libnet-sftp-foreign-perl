@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+SCRIPT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)" # get current script dir portibly
+
 
 ## check we are sudo
 if [[ "${EUID}" -ne 0 ]]; then
@@ -14,11 +16,14 @@ if [ -z "${IN_VERSION}" ]; then
 fi
 export IN_VERSION="${IN_VERSION}"
 
+
 ## install deps
 apt update 2>/dev/null
 apt install build-essential file checkinstall wget -y 2>/dev/null
 
+
 ## run make
+cd "${SCRIPT_DIR}"
 make
 
 
@@ -40,3 +45,8 @@ checkinstall --install=no \
 
 ## tidyup
 make clean
+git checkout -- .
+
+mkdir -pv ./dist
+mv -v ./*.deb ./dist
+mv -v ./checkinstall-debug.*.tgz ./dist

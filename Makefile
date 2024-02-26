@@ -8,4 +8,3 @@ install:
 	cp -v -r dist/Net-SFTP-Foreign-${IN_VERSION}/lib/Net/SFTP/Foreign* /usr/share/perl5/Net/SFTP/
 
 clean:
-	rm -rvf dist/
